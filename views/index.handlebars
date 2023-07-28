@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="../public/css/normalize.css">
-    <link rel="stylesheet" href="../public/css/skeleton.css">
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
 
   </head>
   <body>
@@ -47,19 +47,19 @@
                       <td>
                         <a href="/actions/calls">Call total</a>
                       </td>
-                      <td>R<span class="callTotalSettings" name="callTotal">34.00</span> </td>
+                      <td>R<span class="callTotalSettings" name="callTotal">{{totals.callTotal}}</span> </td>
                     </tr>
                     <tr>
                       <td>
                         <a href="/actions/sms">SMS total</a>
                       </td>
-                      <td>R<span class="smsTotalSettings" name="smsTotal">7.35</span> </td>
+                      <td>R<span class="smsTotalSettings" name="smsTotal">{{totals.smsTotal}}</span> </td>
                     </tr>
                     <tr>
                       <td>
                         <a href="/actions">Total</a>
                       </td>
-                      <td> R<span class="totalSettings" name="grandTotal">41.35</span> </td>
+                      <td> R<span class="totalSettings" name="grandTotal">{{totals.grandTotal}}</span> </td>
                     </tr>
                   </table>
 
