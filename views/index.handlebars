@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../public/css/normalize.css">
+    <link rel="stylesheet" href="../public/css/skeleton.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+
   </head>
   <body>
     <div class="container">
@@ -66,13 +68,13 @@
               <h5>Settings</h5>
               <form action="/settings" method="POST">
               <label for="exampleEmailInput">Call cost</label>
-              <input class="u-full-width callCostSetting" type="number" name="callCost" value="{{settings.callCost}}" step=".01"  placeholder="eg. 2.55">
+              <input class="u-full-width callCostSetting" type="number" name="callCost" value="{{updateSettings.callCost}}" step=".01"  placeholder="eg. 2.55">
               <label for="exampleEmailInput">SMS cost</label>
-              <input class="u-full-width smsCostSetting" type="number" name="smsCost"  value="{{settings.smsCost}}"step=".01" placeholder="eg. 0.65">
+              <input class="u-full-width smsCostSetting" type="number" name="smsCost"  value="{{updateSettings.smsCost}}"step=".01" placeholder="eg. 0.65">
               <label for="">Warning level</label>
-              <input class="u-full-width warningLevelSetting " type="number" name="warningLevel" class="warningLevel" value="{{settings.warningLevel}}" step=".01"  placeholder="eg. 30.00" >
+              <input class="u-full-width warningLevelSetting " type="number" name="warningLevel" class="warningLevel" value="{{updateSettings.warningLevel}}" step=".01"  placeholder="eg. 30.00" >
               <label for="">Critical level</label>
-              <input class="u-full-width criticalLevelSetting" type="number"name="criticalLevel"  value="{{settings.criticalLevel}}" step=".01" placeholder="eg. 65.00">
+              <input class="u-full-width criticalLevelSetting" type="number"name="criticalLevel"  value="{{updateSettings.criticalLevel}}" step=".01" placeholder="eg. 65.00">
               <button class="button-primary updateSettings" type="submit" name="button">Update settings</button>
               </form>
               

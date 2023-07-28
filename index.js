@@ -19,7 +19,7 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.render('index',{
-    settings: settingsBill.getSettings(),
+    updateSettings: settingsBill.getSettings(),
     totals: settingsBill.totals()
 });
 
@@ -33,12 +33,12 @@ settingsBill.setSettings({
     warningLevel: req.body.warningLevel,
     criticalLevel: req.body.criticalLevel
 });
-console.log(settingsBill.getSettings())
+console.log(settingsBill.getSettings());
 res.redirect('/')
 });
 
 app.post('/action', function (req, res) {
-    // Call the recordAction method to update the actions
+   /* // Call the recordAction method to update the actions
     settingsBill.recordAction(req.body.billItemTypeWithSettings);
   
     // Update the totals to be sent to the view
@@ -48,7 +48,7 @@ app.post('/action', function (req, res) {
     res.render('index', {
       settings: settingsBill.getSettings(),
       totals: totals 
-    });
+    });*/
   });
   
 app.get('/actions', function(req, res){
