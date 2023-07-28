@@ -1,6 +1,6 @@
 
 import assert from 'assert'
-import { SettingsBill } from '../js/settings-bill.js';
+import SettingsBill from '../js/settings-bill.js';
 
 describe('settings-bill', function(){
 
