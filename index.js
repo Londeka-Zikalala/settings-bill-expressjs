@@ -14,10 +14,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
+//function to update the levels and use the next middleware to render
+function updateLevels(req, res, next) {
+  const hasReachedWarningLevel = settingsBill.hasReachedWarningLevel();
+  const hasReachedCriticalLevel = settingsBill.hasReachedCriticalLevel();
+
+  res.locals.hasReachedWarningLevel = hasReachedWarningLevel;
+  res.locals.hasReachedCriticalLevel = hasReachedCriticalLevel;
+
+  next();
+}
+
+
+app.get('/',updateLevels, (req, res) => {
+  
   res.render('index',{
     updateSettings: settingsBill.getSettings(),
-    totals: settingsBill.totals()
+    totals: settingsBill.totals(),
 });
 
 });
@@ -33,9 +46,11 @@ res.redirect('/')
 });
 
 app.post('/action', function (req, res) {
-   // Call the recordAction method to update the actions
+  if (!settingsBill.hasReachedCriticalLevel()) {
+    
     settingsBill.recordAction(req.body.billItemTypeWithSettings);
-    res.redirect('/')
+  }
+  res.redirect('/');
   });
   
 app.get('/actions', function(req, res){
@@ -44,7 +59,9 @@ res.render('actions',{
 })
 });
 app.get('/actions/:type', function(req, res){
-
+  const actionType = req.params.type;
+res.render('actions', 
+{actions: settingsBill.actionsFor(actionType)})
 });
 
 app.listen(PORT, () => {
