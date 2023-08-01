@@ -33,12 +33,15 @@ export default function SettingsBill() {
         else if (action === 'call'){
             cost = callCost;
         }
-
-        actionList.push({
-            type: action,
-            cost,
-            timestamp: new Date()
-        });
+//To not record cost that R0.00
+        if (cost > 0) {
+            actionList.push({
+              type: action,
+              cost,
+              timestamp: new Date()
+            });
+          }   
+        
     }
 
     function actions(){

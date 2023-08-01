@@ -1,10 +1,12 @@
 import express from "express";
 import {engine} from 'express-handlebars';
 import bodyParser from 'body-parser';
+import moment from 'moment';
 import SettingsBill from "./js/settings-bill.js";
 let app = express();
 const settingsBill = SettingsBill();
 const PORT = process.env.PORT || 3011;
+const router = express.Router();
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
@@ -28,9 +30,13 @@ function updateLevels(req, res, next) {
 
 app.get('/',updateLevels, (req, res) => {
   
+  const totals = settingsBill.totals();
+  totals.callTotal = totals.callTotal.toFixed(2);
+  totals.smsTotal = totals.smsTotal.toFixed(2);
+  totals.grandTotal = totals.grandTotal.toFixed(2)
   res.render('index',{
     updateSettings: settingsBill.getSettings(),
-    totals: settingsBill.totals(),
+    totals
 });
 
 });
@@ -53,15 +59,27 @@ app.post('/action', function (req, res) {
   res.redirect('/');
   });
   
-app.get('/actions', function(req, res){
-res.render('actions',{
-    actions: settingsBill.actions()
-})
+app.get('/actions', (req, res) => {
+  const actions = settingsBill.actions();
+
+  // Calculating the time lapsed using Moment.js
+  actions.forEach((action) => {
+    action.timeLapsed = moment(action.timestamp).fromNow();
+  });
+
+  res.render('actions', { actions });
 });
-app.get('/actions/:type', function(req, res){
+
+
+app.get('/actions/:type', (req, res) => {
   const actionType = req.params.type;
-res.render('actions', 
-{actions: settingsBill.actionsFor(actionType)})
+  const actions = settingsBill.actionsFor(actionType);
+
+  actions.forEach((action) => {
+    action.timeLapsed = moment(action.timestamp).fromNow();
+  });
+
+  res.render('actions', { actions });
 });
 
 app.listen(PORT, () => {
