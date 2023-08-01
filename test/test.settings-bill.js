@@ -6,9 +6,36 @@ describe('settings-bill', function(){
 
     const settingsBill = SettingsBill();
 
-    it('should be able to record calls', function(){
+    it('should not record actions with zero cost', function () {
+       
+        settingsBill.setSettings({
+          smsCost: 2.50,
+          callCost: 5.00,
+          warningLevel: 5,
+          criticalLevel: 10,
+        });
+    
         settingsBill.recordAction('call');
-        assert.equal(1, settingsBill.actionsFor('call').length);
+        settingsBill.recordAction('call');
+        settingsBill.recordAction('sms');
+        settingsBill.recordAction('sms');
+        settingsBill.setSettings({
+            smsCost:0.00,
+            callCost: 5.00,
+            warningLevel: 5,
+            criticalLevel: 10,
+          });
+        settingsBill.recordAction('call'); 
+        settingsBill.recordAction('sms'); 
+    
+        const actions = settingsBill.actions();
+        assert.equal(actions.length, 5); 
+      });
+
+
+    it('should be able to record calls', function(){
+      
+        assert.equal(3, settingsBill.actionsFor('call').length)
     });
 
     it('should be able to set the settings', function(){

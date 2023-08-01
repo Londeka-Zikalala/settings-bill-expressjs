@@ -23,26 +23,26 @@ export default function SettingsBill() {
             criticalLevel
         }
     }
-
     function recordAction(action) {
-
         let cost = 0;
-        if (action === 'sms'){
-            cost = smsCost;
+      
+        if (action === 'sms') {
+          cost = smsCost;
+        } else if (action === 'call') {
+          cost = callCost;
         }
-        else if (action === 'call'){
-            cost = callCost;
-        }
-//To not record cost that R0.00
+      
+        // To not record actions with R0.00 cost
         if (cost > 0) {
-            actionList.push({
-              type: action,
-              cost,
-              timestamp: new Date()
-            });
-          }   
-        
-    }
+          actionList.push({
+            type: action,
+            cost,
+            timestamp: new Date(),
+          });
+        }
+      }
+      
+   
 
     function actions(){
         return actionList;
