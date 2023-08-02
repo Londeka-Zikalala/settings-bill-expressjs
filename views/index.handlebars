@@ -41,16 +41,16 @@
                 <h5>Totals</h5>
               <table>
                 <tr>
-                  <td class="{{#if hasReachedWarningLevel}}warning{{else}}{{#if hasReachedCriticalLevel}}danger{{/if}}{{/if}}">
+                  <td>
                     <a href="/actions/call">Call total</a>
                   </td>
-                  <td>R<span class="callTotalSettings {{#if hasReachedWarningLevel}}warning{{else}}{{#if hasReachedCriticalLevel}}danger{{/if}}{{/if}}">{{totals.callTotal}}</span></td>
+                  <td>R<span class="callTotalSettings">{{totals.callTotal}}</span></td>
                 </tr>
                 <tr>
-                  <td class="{{#if hasReachedWarningLevel}}warning{{else}}{{#if hasReachedCriticalLevel}}danger{{/if}}{{/if}}">
+                  <td>
                     <a href="/actions/sms">SMS total</a>
                   </td>
-                  <td>R<span class="smsTotalSettings {{#if hasReachedWarningLevel}}warning{{else}}{{#if hasReachedCriticalLevel}}danger{{/if}}{{/if}}">{{totals.smsTotal}}</span></td>
+                  <td>R<span class="smsTotalSettings">{{totals.smsTotal}}</span></td>
                 </tr>
                 <tr>
                   <td class="{{#if hasReachedWarningLevel}}warning{{else}}{{#if hasReachedCriticalLevel}}danger{{/if}}{{/if}}">

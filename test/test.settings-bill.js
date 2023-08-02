@@ -4,7 +4,12 @@ import SettingsBill from '../js/settings-bill.js';
 
 describe('settings-bill', function(){
 
-    const settingsBill = SettingsBill();
+        let settingsBill;
+      
+        beforeEach(function () {
+          // Reset the actionList before each test
+          settingsBill = SettingsBill();
+        });
 
     it('should not record actions with zero cost', function () {
        
@@ -34,8 +39,14 @@ describe('settings-bill', function(){
 
 
     it('should be able to record calls', function(){
-      
-        assert.equal(3, settingsBill.actionsFor('call').length)
+         settingsBill.setSettings({
+          smsCost: 2.50,
+          callCost: 5.00,
+          warningLevel: 5,
+          criticalLevel: 10,
+        })
+        settingsBill.recordAction('call');
+        assert.equal(1, settingsBill.actionsFor('call').length)
     });
 
     it('should be able to set the settings', function(){
